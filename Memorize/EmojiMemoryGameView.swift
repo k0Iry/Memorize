@@ -14,14 +14,14 @@ struct EmojiMemoryGameView: View {
         HStack {
             ForEach(emojiGame.cards) { card in
                 CardView(card: card).onTapGesture {
-                    emojiGame.choose(card: card)
+                    emojiGame.choose(card)
                 }
+                .aspectRatio(2/3, contentMode: .fit)
             }
         }
         .padding()
         .foregroundColor(.orange)
         .font(emojiGame.cards.count != 5 ? Font.largeTitle : Font.footnote)
-        .aspectRatio(2/3, contentMode: .fit)
     }
 }
 
