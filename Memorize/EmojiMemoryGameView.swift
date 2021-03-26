@@ -11,8 +11,13 @@ struct EmojiMemoryGameView: View {
     @ObservedObject var emojiGame = EmojiMemoryGame()
     
     var body: some View {
-        Button("New Game") { emojiGame.newEmojiGame() }
-            .buttonStyle(BorderlessButtonStyle())
+        HStack {
+            Button("New Game") { emojiGame.newEmojiGame() }
+                .buttonStyle(BorderlessButtonStyle())
+                .padding(5)
+            Text("Current theme: " + emojiGame.themeName())
+                .italic()
+        }
 
         Grid(items: emojiGame.cards) { card in
             CardView(card: card).onTapGesture {
