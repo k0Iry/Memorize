@@ -14,7 +14,9 @@ class EmojiMemoryGame : ObservableObject {
         Theme(name: "Halloween", emojis: ["👻", "🎃", "🕷️", "☠️", "🧚‍♀️", "👽", "🌕", "🌑", "🍬", "🧟‍♀️"], color: .orange),
         Theme(name: "Faces", emojis: ["😄", "😫", "🤢", "😡", "😂", "😢", "😙"], numberOfCards: 7, color: .pink),
         Theme(name: "Animals", emojis: ["🐔", "🦆", "🐂", "🐐", "🐬", "🐘", "🐯", "🦁️", "🐑"], color: .green),
-        Theme(name: "Vehicles", emojis: ["🚗", "🚄", "✈️", "🚢", "🚇", "🚐", "🛺", "🚜", "🚁"], color: .blue)
+        Theme(name: "Vehicles", emojis: ["🚗", "🚄", "✈️", "🚢", "🚇", "🚐", "🛺", "🚜", "🚁"], color: .gray),
+        Theme(name: "Food", emojis: ["🍚", "🍜", "🥬", "🥒", "🥓", "🍳", "🥛", "🍹", "🍔", "🥪"], color: .yellow),
+        Theme(name: "Weather", emojis: ["⚡️", "🧊", "☁️", "❄️", "🌧️", "☀️", "🌫️"], color: .blue)
     ]
     
     private static func createMemoryGame() -> (theme: Theme, emojiMemoryGame: MemoryGame<String>) {
@@ -27,6 +29,10 @@ class EmojiMemoryGame : ObservableObject {
     }
     
     // MARK: - Access to the Model
+    
+    func gameScore() -> Int {
+        game.emojiMemoryGame.score
+    }
     
     func themeName() -> String {
         game.theme.name

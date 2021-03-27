@@ -27,6 +27,12 @@ struct EmojiMemoryGameView: View {
         }
         .padding()
         .foregroundColor(emojiGame.themeColor())
+
+        HStack {
+            Text("Score: " + String(emojiGame.gameScore()))
+                .bold()
+                .font(.largeTitle)
+        }
     }
 }
 
