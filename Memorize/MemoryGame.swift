@@ -12,6 +12,8 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
     
     var score: Int = 0
     
+    var date: Date?
+    
     private var indexOfTheOneAndOnlyFaceUpCard: Int? {
         get { cards.indices.filter { cards[$0].isFaceUp }.only }
         set {
@@ -30,7 +32,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
                 if cards[chosenIndex].content == cards[potentialMatchIndex].content {
                     cards[chosenIndex].isMatched = true
                     cards[potentialMatchIndex].isMatched = true
-                    score += 2
+                    score += 2 * max(5 - Int(date!.distance(to: Date())), 1)
                 } else {
                     if cards[chosenIndex].isSeen {
                         score -= 1
@@ -42,6 +44,8 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
                 cards[chosenIndex].isFaceUp = true
             } else {
                 indexOfTheOneAndOnlyFaceUpCard = chosenIndex
+                // start timer here
+                date = Date()
             }
         }
     }

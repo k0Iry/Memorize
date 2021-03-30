@@ -57,9 +57,9 @@ class EmojiMemoryGame : ObservableObject {
     }
     
     struct Theme {
-        var name: String
-        var emojis: Array<String>
+        let name: String
+        let emojis: Array<String>
         var numberOfCards: Int?
-        var color: Color
+        let color: Color
     }
 }
