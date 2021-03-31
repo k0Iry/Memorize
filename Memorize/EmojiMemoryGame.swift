@@ -12,7 +12,7 @@ class EmojiMemoryGame : ObservableObject {
     
     private static let themes = [
         Theme(name: "Halloween", emojis: ["👻", "🎃", "🕷️", "☠️", "🧚‍♀️", "👽", "🌕", "🌑", "🍬", "🧟‍♀️"], color: .orange),
-        Theme(name: "Faces", emojis: ["😄", "😫", "🤢", "😡", "😂", "😢", "😙"], numberOfCards: 7, color: .pink),
+        Theme(name: "Faces", emojis: ["😄", "😫", "🤢", "😡", "😂", "😢", "😙", "🤧", "🥰", "🥳"], numberOfCards: 10, color: .pink),
         Theme(name: "Animals", emojis: ["🐔", "🦆", "🐂", "🐐", "🐬", "🐘", "🐯", "🦁️", "🐑"], color: .green),
         Theme(name: "Vehicles", emojis: ["🚗", "🚄", "✈️", "🚢", "🚇", "🚐", "🛺", "🚜", "🚁"], color: .gray),
         Theme(name: "Food", emojis: ["🍚", "🍜", "🥬", "🥒", "🥓", "🍳", "🥛", "🍹", "🍔", "🥪"], color: .yellow),

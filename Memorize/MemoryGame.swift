@@ -29,16 +29,21 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
     mutating func choose(_ card: Card) {
         if let chosenIndex = cards.firstIndex(matching: card), !cards[chosenIndex].isFaceUp, !cards[chosenIndex].isMatched {
             if let potentialMatchIndex = indexOfTheOneAndOnlyFaceUpCard {
+                let scoreScale = max(5 - Int(date!.distance(to: Date())), 1)
                 if cards[chosenIndex].content == cards[potentialMatchIndex].content {
                     cards[chosenIndex].isMatched = true
                     cards[potentialMatchIndex].isMatched = true
-                    score += 2 * max(5 - Int(date!.distance(to: Date())), 1)
+                    if cards[chosenIndex].isSeen || cards[potentialMatchIndex].isSeen {
+                        score += 2 * scoreScale
+                    } else {
+                        score += 10
+                    }
                 } else {
                     if cards[chosenIndex].isSeen {
-                        score -= 1
+                        score -= scoreScale
                     }
                     if cards[potentialMatchIndex].isSeen {
-                        score -= 1
+                        score -= scoreScale
                     }
                 }
                 cards[chosenIndex].isFaceUp = true
