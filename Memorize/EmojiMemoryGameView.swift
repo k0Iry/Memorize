@@ -11,12 +11,12 @@ struct EmojiMemoryGameView: View {
     @ObservedObject var emojiGame = EmojiMemoryGame()
     
     var body: some View {
-        HStack {
+        HStack() {
+            Text(emojiGame.themeName())
+                .italic()
             Button("New Game") { emojiGame.newEmojiGame() }
                 .buttonStyle(BorderlessButtonStyle())
                 .padding(5)
-            Text("Current theme: " + emojiGame.themeName())
-                .italic()
         }
 
         Grid(items: emojiGame.cards) { card in
@@ -41,26 +41,28 @@ struct CardView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            ZStack {
-                if card.isFaceUp {
-                    RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
-                    RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
+            if card.isFaceUp || !card.isMatched {
+                ZStack {
+                    Pie(startAngle: Angle.radians(-Double.pi / 2), endAngle: Angle.degrees(20), clockWise: true)
+                        .padding(5)
+                        .opacity(0.4)
                     Text(card.content)
-                } else {
-                    if !card.isMatched {
-                        RoundedRectangle(cornerRadius: cornerRadius).fill()
-                    }
+                        .font(Font.system(size: bodySize(for: geometry.size)))
                 }
+                .cardify(isFaceUp: card.isFaceUp)
             }
-            .font(Font.system(size: bodySize(for: geometry.size)))
         }
     }
     
-    func bodySize(for size: CGSize) -> CGFloat {
-        return min(size.width, size.height) * 0.75
+    private func bodySize(for size: CGSize) -> CGFloat {
+        return min(size.width, size.height) * 0.7
     }
-    
-    // MARK: - Drawing Constants
-    let cornerRadius: CGFloat = 10.0
-    let edgeLineWidth: CGFloat = 3
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        let game = EmojiMemoryGame()
+        game.choose(game.cards[0])
+        return EmojiMemoryGameView(emojiGame: game)
+    }
 }
